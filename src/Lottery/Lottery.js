@@ -5,10 +5,9 @@ import './Lottery.css';
 class Lottery extends Component {
     constructor(props) {
         super(props);
-        console.log(props)
         this.state = {
-            ballArray: [],
-            numberArray: []
+            ballArray: Array.from({length: this.props.numBalls}),
+            numberArray: Array.from({length: this.props.numBalls})
         }
         this.calculateBalls = this.calculateBalls.bind(this);
         this.calculateNumber = this.calculateNumber.bind(this);
@@ -16,12 +15,7 @@ class Lottery extends Component {
     }
 
     calculateBalls() {
-        for (let i = 0; i < this.props.numBalls; i++ ){
-            this.state.ballArray.push(i);
-        }
-        console.log(this.state.ballArray);
-
-        return this.state.ballArray.map(ball => <li key={ball}>{<Ball number={this.state.numberArray} />}</li>);
+        return this.state.ballArray.map(ball => <li key={ball}>{<Ball number={ball} />}</li>);
     }
 
     calculateNumber() {
@@ -29,7 +23,6 @@ class Lottery extends Component {
     }
 
     generateNumbers() {
-        console.log('clicked!');
         let num = this.calculateNumber()
         for (let i = 0; i < this.props.numBalls; i++ ){
             this.state.numberArray.push(num);
